@@ -5,8 +5,8 @@ const config = {
   tagline: 'Structured DevOps learning — from Linux to Kubernetes.',
   favicon: 'img/favicon.ico',
 
-  url: 'https://learn.devopschronicles.com',
-  baseUrl: '/',
+  url: 'https://devopschroniclesgit.github.io',
+  baseUrl: '/devops-learn',
 
   organizationName: 'devopschroniclesGit',
   projectName: 'devops-learn',
