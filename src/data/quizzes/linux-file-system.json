@@ -1,0 +1,212 @@
+[
+  {
+    "id": 1,
+    "question": "What command prints the current working directory?",
+    "type": "single",
+    "options": ["ls", "cd", "pwd", "cat"],
+    "correct": 2,
+    "explanation": "pwd stands for Print Working Directory. It outputs the full absolute path of your current location in the filesystem."
+  },
+  {
+    "id": 2,
+    "question": "Which command lists all files including hidden files?",
+    "type": "single",
+    "options": ["ls", "ls -l", "ls -a", "ls -r"],
+    "correct": 2,
+    "explanation": "ls -a shows all files including hidden ones. Hidden files in Linux start with a dot, for example .bashrc or .ssh."
+  },
+  {
+    "id": 3,
+    "question": "What does a dot (.) represent in a file path?",
+    "type": "single",
+    "options": [
+      "The root directory",
+      "The current directory",
+      "The parent directory",
+      "The home directory"
+    ],
+    "correct": 1,
+    "explanation": "A single dot (.) refers to the current directory. Double dot (..) refers to the parent directory one level up."
+  },
+  {
+    "id": 4,
+    "question": "Which of the following are absolute paths? Select all that apply.",
+    "type": "multiple",
+    "options": [
+      "/home/user/documents",
+      "./config/settings",
+      "/etc/nginx/nginx.conf",
+      "../parent-folder"
+    ],
+    "correct": [0, 2],
+    "explanation": "Absolute paths always start with /. They define the full path from the root of the filesystem. Relative paths use ./ or ../ and depend on your current location."
+  },
+  {
+    "id": 5,
+    "question": "What is the root directory in Linux represented as?",
+    "type": "single",
+    "options": ["~", "/", "//", "./"],
+    "correct": 1,
+    "explanation": "The root directory is represented by a single forward slash /. It is the top of the entire Linux filesystem hierarchy. Everything else is under it."
+  },
+  {
+    "id": 6,
+    "question": "What does the tilde (~) represent in a path?",
+    "type": "single",
+    "options": [
+      "The root directory",
+      "The current directory",
+      "The home directory of the current user",
+      "The parent directory"
+    ],
+    "correct": 2,
+    "explanation": "The tilde ~ is a shortcut for the current user's home directory. For a user called sikhumbuzok it expands to /home/sikhumbuzok."
+  },
+  {
+    "id": 7,
+    "question": "Which command moves you to the parent directory?",
+    "type": "single",
+    "options": ["cd ~", "cd /", "cd ..", "cd -"],
+    "correct": 2,
+    "explanation": "cd .. moves you one level up to the parent directory. cd ~ goes home, cd / goes to root, and cd - goes to the previous directory."
+  },
+  {
+    "id": 8,
+    "question": "What does ls -lh do?",
+    "type": "single",
+    "options": [
+      "Lists files sorted by size",
+      "Lists files with human-readable sizes in long format",
+      "Lists hidden files only",
+      "Lists files recursively"
+    ],
+    "correct": 1,
+    "explanation": "The -l flag gives a long listing with permissions, owner, size and date. The -h flag makes the file sizes human-readable — showing KB, MB, GB instead of raw bytes."
+  },
+  {
+    "id": 9,
+    "question": "Which directory typically contains system-wide configuration files?",
+    "type": "single",
+    "options": ["/bin", "/etc", "/var", "/usr"],
+    "correct": 1,
+    "explanation": "/etc contains system-wide configuration files. Examples include /etc/nginx/nginx.conf, /etc/ssh/sshd_config, and /etc/hosts."
+  },
+  {
+    "id": 10,
+    "question": "Which directories contain executable binaries? Select all that apply.",
+    "type": "multiple",
+    "options": ["/bin", "/etc", "/usr/bin", "/var"],
+    "correct": [0, 2],
+    "explanation": "/bin contains essential system binaries like ls, cp, and mv. /usr/bin contains binaries installed for all users. /etc is for config files and /var is for variable data like logs."
+  },
+  {
+    "id": 11,
+    "question": "What does the find command do?",
+    "type": "single",
+    "options": [
+      "Searches inside file contents",
+      "Searches for files and directories by name, type or attribute",
+      "Lists all files in the current directory",
+      "Displays disk usage"
+    ],
+    "correct": 1,
+    "explanation": "find searches for files and directories. Example: find /etc -name '*.conf' finds all .conf files under /etc. It is more powerful than ls for searching."
+  },
+  {
+    "id": 12,
+    "question": "What is the correct command to create a new directory called projects?",
+    "type": "single",
+    "options": ["touch projects", "mkdir projects", "create projects", "new projects"],
+    "correct": 1,
+    "explanation": "mkdir creates a new directory. Use mkdir -p to create nested directories in one command, for example mkdir -p projects/devops/terraform."
+  },
+  {
+    "id": 13,
+    "question": "Which command shows disk usage of files and directories in human-readable format?",
+    "type": "single",
+    "options": ["df -h", "du -sh *", "ls -lh", "free -h"],
+    "correct": 1,
+    "explanation": "du -sh * shows the disk usage of each item in the current directory in a summarised human-readable format. df -h shows overall filesystem usage, not per-directory."
+  },
+  {
+    "id": 14,
+    "question": "What does the -r flag do in the cp command?",
+    "type": "single",
+    "options": [
+      "Removes the source after copying",
+      "Copies recursively including subdirectories",
+      "Reverses the copy direction",
+      "Copies only read-only files"
+    ],
+    "correct": 1,
+    "explanation": "cp -r copies directories recursively. Without -r, cp cannot copy directories and will return an error. Example: cp -r /source /destination."
+  },
+  {
+    "id": 15,
+    "question": "Which of the following statements about the /var directory are correct? Select all that apply.",
+    "type": "multiple",
+    "options": [
+      "It contains log files",
+      "It contains user home directories",
+      "It contains application data that changes frequently",
+      "It contains system binaries"
+    ],
+    "correct": [0, 2],
+    "explanation": "/var stands for variable data. It contains files that grow and change during system operation — logs in /var/log, mail spools, databases, and application runtime data."
+  },
+  {
+    "id": 16,
+    "question": "What does ls -lt show?",
+    "type": "single",
+    "options": [
+      "Files sorted alphabetically",
+      "Files sorted by size",
+      "Files sorted by modification time, newest first",
+      "Files sorted by file type"
+    ],
+    "correct": 2,
+    "explanation": "The -t flag sorts by modification time with the newest file first. Combined with -l for long format, ls -lt is useful for finding recently changed files."
+  },
+  {
+    "id": 17,
+    "question": "Which command would you use to display the last 20 lines of a log file?",
+    "type": "single",
+    "options": ["head -20 file.log", "tail -20 file.log", "cat -20 file.log", "less -20 file.log"],
+    "correct": 1,
+    "explanation": "tail -20 shows the last 20 lines. tail -f follows the file in real time as new lines are added — essential for watching live logs. head shows the beginning of a file."
+  },
+  {
+    "id": 18,
+    "question": "What does the mv command do when used on files in the same directory?",
+    "type": "single",
+    "options": [
+      "Copies the file",
+      "Renames the file",
+      "Moves the file to /tmp",
+      "Creates a symlink"
+    ],
+    "correct": 1,
+    "explanation": "When source and destination are in the same directory, mv renames the file. When they are different directories, mv moves the file. It does not create a copy."
+  },
+  {
+    "id": 19,
+    "question": "Which command creates an empty file called notes.txt?",
+    "type": "single",
+    "options": ["mkdir notes.txt", "touch notes.txt", "create notes.txt", "echo notes.txt"],
+    "correct": 1,
+    "explanation": "touch creates an empty file if it does not exist. If the file already exists, touch updates its timestamp without changing its contents."
+  },
+  {
+    "id": 20,
+    "question": "What is stored in /proc?",
+    "type": "single",
+    "options": [
+      "Installed programs",
+      "System processes as a virtual filesystem",
+      "User home directories",
+      "Temporary files"
+    ],
+    "correct": 1,
+    "explanation": "/proc is a virtual filesystem — it does not exist on disk. It exposes real-time kernel and process information. For example, /proc/cpuinfo shows CPU details and /proc/meminfo shows memory usage."
+  }
+]
