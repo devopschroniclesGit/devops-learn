@@ -234,3 +234,21 @@
   justify-content: center;
   flex-wrap: wrap;
 }
+.breakdownContent {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+}
+.breakdownAnswer {
+  font-size: 12px;
+  font-family: var(--ifm-font-family-monospace);
+  color: #2e7d32;
+}
+.breakdownExplanation {
+  font-size: 12px;
+  color: var(--ifm-color-emphasis-600);
+  line-height: 1.5;
+  margin-top: 2px;
+  font-style: italic;
+}
