@@ -6,13 +6,17 @@ const config = {
   favicon: 'img/favicon.ico',
 
   url: 'https://devopschroniclesgit.github.io',
-  baseUrl: '/devops-learn',
+  baseUrl: '/devops-learn/',
 
   organizationName: 'devopschroniclesGit',
   projectName: 'devops-learn',
 
   onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
+  markdown: {
+    hooks: {
+  	onBrokenMarkdownLinks: 'warn',
+    },
+  },
 
   presets: [
     [
@@ -47,7 +51,7 @@ const config = {
       items: [
         {
           type: 'docSidebar',
-          sidebarId: 'learnSidebar',
+          sidebarId: 'tutorialSidebar',
           position: 'left',
           label: 'Courses',
         },
@@ -65,7 +69,7 @@ const config = {
         {
           title: 'Tracks',
           items: [
-            { label: 'Track 1 — Foundations', to: '/track-1/linux/intro' },
+            { label: 'Track 1 — Foundations', to: '/docs/track-1/linux/intro' },
           ],
         },
         {
