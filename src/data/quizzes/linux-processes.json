@@ -1,0 +1,252 @@
+[
+  {
+    "id": 1,
+    "question": "Which command shows the status of the nginx service?",
+    "type": "single",
+    "options": [
+      "service nginx",
+      "systemctl status nginx",
+      "ps nginx",
+      "systemd nginx status"
+    ],
+    "correct": 1,
+    "explanation": "systemctl status nginx shows whether the service is running, its PID, recent log output, and whether it is enabled to start on boot. It is the primary command for inspecting a service managed by systemd."
+  },
+  {
+    "id": 2,
+    "question": "What is the difference between systemctl stop and systemctl disable?",
+    "type": "single",
+    "options": [
+      "They are identical commands",
+      "stop halts the service now, disable prevents it starting on boot",
+      "stop removes the service, disable pauses it",
+      "disable halts the service now, stop prevents it starting on boot"
+    ],
+    "correct": 1,
+    "explanation": "systemctl stop halts the running service immediately but it will start again on next boot if enabled. systemctl disable removes it from the boot sequence but does not stop it if currently running. To do both use systemctl disable --now servicename."
+  },
+  {
+    "id": 3,
+    "question": "Which command enables nginx to start automatically on boot and starts it immediately?",
+    "type": "single",
+    "options": [
+      "systemctl start nginx",
+      "systemctl enable nginx",
+      "systemctl enable --now nginx",
+      "systemctl boot nginx"
+    ],
+    "correct": 2,
+    "explanation": "systemctl enable --now is a shortcut that both enables the service for boot and starts it immediately in one command. Without --now you would need two separate commands: systemctl enable nginx && systemctl start nginx."
+  },
+  {
+    "id": 4,
+    "question": "Where are systemd service unit files stored?",
+    "type": "single",
+    "options": [
+      "/etc/init.d/",
+      "/etc/systemd/",
+      "/etc/systemd/system/ or /usr/lib/systemd/system/",
+      "/var/systemd/units/"
+    ],
+    "correct": 2,
+    "explanation": "/usr/lib/systemd/system/ contains unit files installed by packages. /etc/systemd/system/ contains custom or overridden unit files and takes priority. When you create a custom service, put the unit file in /etc/systemd/system/."
+  },
+  {
+    "id": 5,
+    "question": "What does systemctl daemon-reload do?",
+    "type": "single",
+    "options": [
+      "Restarts all running services",
+      "Reloads systemd and picks up new or modified unit files",
+      "Reloads the service configuration without restarting",
+      "Resets failed service states"
+    ],
+    "correct": 1,
+    "explanation": "After creating or modifying a unit file in /etc/systemd/system/, you must run systemctl daemon-reload before systemd recognises the changes. It rescans unit files without restarting services."
+  },
+  {
+    "id": 6,
+    "question": "Which command shows all failed services on the system?",
+    "type": "single",
+    "options": [
+      "systemctl list-units --failed",
+      "systemctl --failed",
+      "journalctl --failed",
+      "Both systemctl list-units --failed and systemctl --failed"
+    ],
+    "correct": 3,
+    "explanation": "Both systemctl list-units --state=failed and systemctl --failed show services in a failed state. This should be one of the first commands you run when SSHing into a system to check overall health."
+  },
+  {
+    "id": 7,
+    "question": "What command views logs for the nginx service in real time?",
+    "type": "single",
+    "options": [
+      "tail -f /var/log/nginx",
+      "systemctl logs -f nginx",
+      "journalctl -u nginx -f",
+      "logwatch nginx"
+    ],
+    "correct": 2,
+    "explanation": "journalctl -u nginx -f follows the nginx service logs in real time. -u specifies the unit (service name), -f follows new output. journalctl is the log viewer for systemd's journal, replacing /var/log/messages for systemd-managed services."
+  },
+  {
+    "id": 8,
+    "question": "What does a systemd unit file [Service] section's Restart=always directive do?",
+    "type": "single",
+    "options": [
+      "Restarts the service on every boot",
+      "Automatically restarts the service if it exits or crashes",
+      "Restarts the service every hour",
+      "Restarts the service only if it exits with an error code"
+    ],
+    "correct": 1,
+    "explanation": "Restart=always means systemd restarts the service regardless of how it exited — clean exit, crash, or signal. Restart=on-failure only restarts on non-zero exit codes. For production services, Restart=always combined with RestartSec=5 is a common pattern."
+  },
+  {
+    "id": 9,
+    "question": "What is a zombie process?",
+    "type": "single",
+    "options": [
+      "A process consuming 100% CPU",
+      "A process that has finished but its exit status has not been read by its parent",
+      "A process running without a terminal",
+      "A process with elevated privileges"
+    ],
+    "correct": 1,
+    "explanation": "A zombie process has completed execution but remains in the process table because its parent has not read its exit status with wait(). It consumes no CPU or memory but takes a process table slot. Many zombies indicate a bug in the parent process."
+  },
+  {
+    "id": 10,
+    "question": "Which command shows the process tree — parent and child relationships?",
+    "type": "single",
+    "options": ["ps aux", "pstree", "top", "jobs"],
+    "correct": 1,
+    "explanation": "pstree shows processes in a tree format displaying parent-child relationships. pstree -p also shows PIDs. Understanding process hierarchy is important when killing a process group — killing a parent often kills its children too."
+  },
+  {
+    "id": 11,
+    "question": "What does the nice value of a process control?",
+    "type": "single",
+    "options": [
+      "The process memory limit",
+      "The CPU scheduling priority",
+      "The process owner",
+      "The maximum file descriptors"
+    ],
+    "correct": 1,
+    "explanation": "The nice value ranges from -20 (highest priority) to 19 (lowest priority). Default is 0. Use nice -n 10 command to start a process with lower priority, or renice 10 -p PID to change a running process. Lower priority processes yield CPU to higher priority ones."
+  },
+  {
+    "id": 12,
+    "question": "Which sections are required in a minimal systemd service unit file? Select all that apply.",
+    "type": "multiple",
+    "options": [
+      "[Unit]",
+      "[Service]",
+      "[Install]",
+      "[Network]"
+    ],
+    "correct": [0, 1, 2],
+    "explanation": "[Unit] provides description and dependencies. [Service] defines how to start the service. [Install] defines the target (runlevel equivalent) for enabling. [Network] is not a standard unit file section. All three are needed for a properly functioning service."
+  },
+  {
+    "id": 13,
+    "question": "What does journalctl -b show?",
+    "type": "single",
+    "options": [
+      "Boot-time kernel messages only",
+      "All logs since the last boot",
+      "Logs from a specific binary",
+      "Logs filtered by priority"
+    ],
+    "correct": 1,
+    "explanation": "journalctl -b shows all journal entries since the current boot. journalctl -b -1 shows logs from the previous boot. This is useful for diagnosing issues that occurred during or after startup."
+  },
+  {
+    "id": 14,
+    "question": "What happens to a background process started with & when you log out?",
+    "type": "single",
+    "options": [
+      "It continues running indefinitely",
+      "It receives SIGHUP and typically terminates",
+      "It is automatically converted to a daemon",
+      "It is moved to the init process"
+    ],
+    "correct": 1,
+    "explanation": "When you log out, the shell sends SIGHUP to its child processes. Most processes terminate on SIGHUP unless they explicitly ignore it. Use nohup command & or run inside a tmux or screen session to keep processes running after logout."
+  },
+  {
+    "id": 15,
+    "question": "Which command shows how long the system has been running?",
+    "type": "single",
+    "options": ["uptime", "top", "systemctl status", "ps aux"],
+    "correct": 0,
+    "explanation": "uptime shows how long the system has been running, the number of logged-in users, and the load averages for the past 1, 5, and 15 minutes. It is a quick health check command."
+  },
+  {
+    "id": 16,
+    "question": "What does ExecStart in a systemd unit file define?",
+    "type": "single",
+    "options": [
+      "The command to run when the service stops",
+      "The command that starts the service",
+      "The user the service runs as",
+      "The restart policy"
+    ],
+    "correct": 1,
+    "explanation": "ExecStart specifies the command and arguments to execute when the service starts. ExecStop defines the stop command. ExecReload defines the reload command. User= specifies which user runs the service. These are all separate directives in the [Service] section."
+  },
+  {
+    "id": 17,
+    "question": "What is the purpose of systemd targets?",
+    "type": "single",
+    "options": [
+      "To define which user a service runs as",
+      "To group units and define system states equivalent to runlevels",
+      "To set resource limits on services",
+      "To configure network interfaces"
+    ],
+    "correct": 1,
+    "explanation": "systemd targets group units together and represent system states. multi-user.target is equivalent to runlevel 3 (multi-user, no GUI). graphical.target is runlevel 5. WantedBy=multi-user.target in a unit file means the service starts in normal multi-user mode."
+  },
+  {
+    "id": 18,
+    "question": "Which command resets a service that is in a failed state so it can be started again?",
+    "type": "single",
+    "options": [
+      "systemctl restart servicename",
+      "systemctl reset-failed servicename",
+      "systemctl clear servicename",
+      "systemctl recover servicename"
+    ],
+    "correct": 1,
+    "explanation": "systemctl reset-failed servicename clears the failed state so the service can be started again. Without this, if a service hits its restart limit and enters failed state, systemctl start will refuse to start it until the failed state is cleared."
+  },
+  {
+    "id": 19,
+    "question": "What does lsof -i :8080 show?",
+    "type": "single",
+    "options": [
+      "All files on the system",
+      "The process using port 8080",
+      "All open network connections",
+      "Files modified in the last 8080 seconds"
+    ],
+    "correct": 1,
+    "explanation": "lsof (list open files) -i :port shows which process has a specific port open. It shows the process name, PID, and user. ss -tulnp | grep 8080 is an alternative. Both are useful for finding what is using a port."
+  },
+  {
+    "id": 20,
+    "question": "Which of the following are correct about systemd service dependencies? Select all that apply.",
+    "type": "multiple",
+    "options": [
+      "After=network.target means the service starts after the network is up",
+      "Requires=postgresql.service means the service will not start without PostgreSQL",
+      "Wants=redis.service means the service prefers but does not require Redis",
+      "Before=nginx.service means this service must start before nginx"
+    ],
+    "correct": [0, 1, 2, 3],
+    "explanation": "All four are correct. After/Before control ordering. Requires creates a hard dependency — if PostgreSQL fails this service fails too. Wants creates a soft dependency — the service starts even if Redis fails. These directives go in the [Unit] section."
+  }
+]
