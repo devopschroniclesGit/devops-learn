@@ -1,0 +1,237 @@
+[
+  {
+    "id": 1,
+    "question": "What does the permission string -rwxr-xr-- represent?",
+    "type": "single",
+    "options": [
+      "Owner: read/write/execute, Group: read/execute, Others: read only",
+      "Owner: read/write, Group: read/execute, Others: read/execute",
+      "Owner: read/write/execute, Group: read only, Others: read/execute",
+      "Owner: full access, Group: full access, Others: no access"
+    ],
+    "correct": 0,
+    "explanation": "Permissions are read in three groups of three: owner (rwx), group (r-x), others (r--). A dash means the permission is not set. So rwx = read+write+execute, r-x = read+execute, r-- = read only."
+  },
+  {
+    "id": 2,
+    "question": "What numeric permission value gives the owner read and write, group read only, others no permissions?",
+    "type": "single",
+    "options": ["755", "644", "600", "777"],
+    "correct": 1,
+    "explanation": "Each permission digit is calculated: read=4, write=2, execute=1. Owner rw- = 4+2 = 6. Group r-- = 4. Others --- = 0. So 640... wait, 644 gives group read and others read. 640 would be owner rw, group r, others none. 644 is the most common file permission."
+  },
+  {
+    "id": 3,
+    "question": "Which command changes the owner of a file to the user devops?",
+    "type": "single",
+    "options": [
+      "chmod devops file.txt",
+      "chown devops file.txt",
+      "chgrp devops file.txt",
+      "usermod devops file.txt"
+    ],
+    "correct": 1,
+    "explanation": "chown changes file ownership. chown user:group file sets both owner and group. chgrp changes only the group. chmod changes permissions, not ownership."
+  },
+  {
+    "id": 4,
+    "question": "What does chmod 755 do to a file?",
+    "type": "single",
+    "options": [
+      "Owner: full access, Group: read/write, Others: read/write",
+      "Owner: full access, Group: read/execute, Others: read/execute",
+      "Owner: read/write, Group: read only, Others: read only",
+      "Owner: full access, Group: no access, Others: no access"
+    ],
+    "correct": 1,
+    "explanation": "755 breaks down as: owner 7 = rwx (4+2+1), group 5 = r-x (4+0+1), others 5 = r-x. This is the standard permission for executable scripts and directories."
+  },
+  {
+    "id": 5,
+    "question": "Which of the following are valid ways to add execute permission for the owner? Select all that apply.",
+    "type": "multiple",
+    "options": [
+      "chmod u+x file.sh",
+      "chmod 100 file.sh",
+      "chmod +x file.sh",
+      "chmod o+x file.sh"
+    ],
+    "correct": [0, 1, 2],
+    "explanation": "chmod u+x adds execute for owner only. chmod 100 sets owner execute only numerically. chmod +x adds execute for all (owner, group, others). chmod o+x adds execute for others only — not just the owner."
+  },
+  {
+    "id": 6,
+    "question": "What command creates a new user called devops on a Linux system?",
+    "type": "single",
+    "options": [
+      "adduser devops",
+      "useradd devops",
+      "newuser devops",
+      "createuser devops"
+    ],
+    "correct": 1,
+    "explanation": "useradd is the standard low-level command. adduser is a friendlier wrapper available on Debian/Ubuntu systems that also creates home directory and sets a password interactively. On RHEL/CentOS/AlmaLinux, useradd is what you use."
+  },
+  {
+    "id": 7,
+    "question": "What does the sudo command do?",
+    "type": "single",
+    "options": [
+      "Switches permanently to the root user",
+      "Runs a single command with elevated privileges",
+      "Creates a new sudo user",
+      "Lists all sudo permissions"
+    ],
+    "correct": 1,
+    "explanation": "sudo runs one command as root (or another user) without switching to that user permanently. su - switches your session to another user. sudo is safer because it logs every command and requires your own password."
+  },
+  {
+    "id": 8,
+    "question": "Which file controls who can use sudo?",
+    "type": "single",
+    "options": ["/etc/passwd", "/etc/shadow", "/etc/sudoers", "/etc/group"],
+    "correct": 2,
+    "explanation": "/etc/sudoers defines which users and groups can run which commands with sudo. Always edit it with visudo — it validates syntax before saving and prevents you from locking yourself out."
+  },
+  {
+    "id": 9,
+    "question": "What does /etc/passwd contain?",
+    "type": "single",
+    "options": [
+      "Encrypted user passwords",
+      "User account information including username, UID, home directory and shell",
+      "Group membership information",
+      "Sudo permission rules"
+    ],
+    "correct": 1,
+    "explanation": "/etc/passwd contains user account info — username, UID, GID, home directory, and default shell. It does NOT contain passwords anymore. Passwords are stored in /etc/shadow which is only readable by root."
+  },
+  {
+    "id": 10,
+    "question": "Which command shows all currently running processes?",
+    "type": "single",
+    "options": ["ps", "ps aux", "top -all", "list processes"],
+    "correct": 1,
+    "explanation": "ps aux shows all processes from all users with detailed information. a = all users, u = user-oriented format, x = processes without a terminal. ps alone shows only your current session processes."
+  },
+  {
+    "id": 11,
+    "question": "What does kill -9 do?",
+    "type": "single",
+    "options": [
+      "Gracefully stops a process",
+      "Pauses a process",
+      "Forcefully terminates a process immediately",
+      "Restarts a process"
+    ],
+    "correct": 2,
+    "explanation": "Signal 9 (SIGKILL) cannot be caught or ignored by the process — the kernel terminates it immediately. kill -15 (SIGTERM) asks the process to shut down gracefully first. Always try SIGTERM before SIGKILL."
+  },
+  {
+    "id": 12,
+    "question": "Which command finds the process ID of a running nginx process?",
+    "type": "single",
+    "options": [
+      "ps nginx",
+      "find nginx",
+      "pgrep nginx",
+      "locate nginx"
+    ],
+    "correct": 2,
+    "explanation": "pgrep returns the PID of processes matching the name. pidof also works. You can also use ps aux | grep nginx but pgrep is cleaner and scriptable."
+  },
+  {
+    "id": 13,
+    "question": "What does chmod 600 on a file mean?",
+    "type": "single",
+    "options": [
+      "Owner read/write, Group read only, Others read only",
+      "Owner read/write only, Group no access, Others no access",
+      "Owner read only, Group no access, Others no access",
+      "Everyone has read access"
+    ],
+    "correct": 1,
+    "explanation": "600 = owner rw- (6), group --- (0), others --- (0). This is the correct permission for private SSH keys (~/.ssh/id_rsa). SSH will refuse to use a key that is readable by group or others."
+  },
+  {
+    "id": 14,
+    "question": "Which command adds user devops to the wheel group?",
+    "type": "single",
+    "options": [
+      "addgroup devops wheel",
+      "groupadd devops wheel",
+      "usermod -aG wheel devops",
+      "useradd -g wheel devops"
+    ],
+    "correct": 2,
+    "explanation": "usermod -aG adds a user to a supplementary group. The -a flag means append — without it, the user is removed from all other groups. wheel is the group that grants sudo access on RHEL-based systems. On Ubuntu the group is called sudo."
+  },
+  {
+    "id": 15,
+    "question": "What does the sticky bit do on a directory?",
+    "type": "single",
+    "options": [
+      "Prevents the directory from being deleted",
+      "Only the file owner or root can delete files inside it",
+      "Makes all files in the directory executable",
+      "Prevents files from being modified"
+    ],
+    "correct": 1,
+    "explanation": "The sticky bit on a directory means only the file owner, directory owner, or root can delete files inside — even if others have write permission on the directory. The classic example is /tmp which has permissions 1777."
+  },
+  {
+    "id": 16,
+    "question": "Which command shows processes sorted by CPU usage in real time?",
+    "type": "single",
+    "options": ["ps aux", "top", "htop", "All of the above except ps aux"],
+    "correct": 3,
+    "explanation": "top and htop both show processes in real time sorted by CPU. ps aux is a snapshot — it does not update. Both top and htop are correct answers here, so the answer is all except ps aux."
+  },
+  {
+    "id": 17,
+    "question": "What information does /etc/shadow store?",
+    "type": "single",
+    "options": [
+      "User home directories",
+      "Hashed passwords and password expiry information",
+      "Group memberships",
+      "User login history"
+    ],
+    "correct": 1,
+    "explanation": "/etc/shadow stores hashed passwords and password aging information — when the password was last changed, when it expires, and account lock status. It is only readable by root, unlike /etc/passwd which is world-readable."
+  },
+  {
+    "id": 18,
+    "question": "Which of the following correctly describe file permission bits? Select all that apply.",
+    "type": "multiple",
+    "options": [
+      "r = 4, w = 2, x = 1",
+      "chmod 777 gives everyone full access",
+      "chmod 000 removes all permissions",
+      "The execute bit on a directory means you can list its contents"
+    ],
+    "correct": [0, 1, 2],
+    "explanation": "r=4, w=2, x=1 is correct. 777 gives rwx to owner, group and others. 000 removes all permissions. However, the execute bit on a directory means you can enter it (cd into it), not list it — listing requires the read bit."
+  },
+  {
+    "id": 19,
+    "question": "What does the nohup command do?",
+    "type": "single",
+    "options": [
+      "Runs a process with elevated privileges",
+      "Runs a process that survives after you log out",
+      "Stops a process from using the network",
+      "Limits the CPU usage of a process"
+    ],
+    "correct": 1,
+    "explanation": "nohup (no hang up) runs a command that ignores the HUP signal sent when you log out. Combined with & to run in the background: nohup ./script.sh &. Output goes to nohup.out by default."
+  },
+  {
+    "id": 20,
+    "question": "Which command displays the groups a user belongs to?",
+    "type": "single",
+    "options": ["usermod", "groups", "id", "Both groups and id"],
+    "correct": 3,
+    "explanation": "Both commands work. groups username lists group memberships. id username shows UID, GID, and all group memberships. id gives more detail — it is the more useful command in practice."
+  }
+]

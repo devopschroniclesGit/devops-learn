@@ -13,6 +13,8 @@ const sidebars = {
             'track-1/linux/intro',
             'track-1/linux/file-system',
             'track-1/linux/quiz-file-system',
+	    'track-1/linux/permissions',
+	    'track-1/linux/quiz-permissions',
           ],
         },
       ],
