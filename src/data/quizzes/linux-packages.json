@@ -1,0 +1,247 @@
+[
+  {
+    "id": 1,
+    "question": "Which package manager is used on RHEL, CentOS, AlmaLinux, and Rocky Linux?",
+    "type": "single",
+    "options": ["apt", "dnf", "pacman", "zypper"],
+    "correct": 1,
+    "explanation": "dnf (Dandified YUM) is the package manager on RHEL-based distributions. apt is used on Debian/Ubuntu. pacman is used on Arch Linux. zypper is used on openSUSE. Knowing which package manager matches which distro family is fundamental."
+  },
+  {
+    "id": 2,
+    "question": "What does dnf update -y do?",
+    "type": "single",
+    "options": [
+      "Downloads updates without installing them",
+      "Updates all installed packages and answers yes to all prompts",
+      "Updates only security packages",
+      "Checks for updates without downloading"
+    ],
+    "correct": 1,
+    "explanation": "dnf update upgrades all installed packages to their latest versions. The -y flag automatically answers yes to confirmation prompts. On Ubuntu/Debian the equivalent is apt update && apt upgrade -y."
+  },
+  {
+    "id": 3,
+    "question": "Which command installs the nginx package on an Ubuntu system?",
+    "type": "single",
+    "options": [
+      "dnf install nginx",
+      "apt install nginx",
+      "yum install nginx",
+      "pkg install nginx"
+    ],
+    "correct": 1,
+    "explanation": "Ubuntu uses the apt package manager. apt install nginx installs the package. On RHEL-based systems you would use dnf install nginx. Always run apt update first to refresh the package index before installing."
+  },
+  {
+    "id": 4,
+    "question": "What is the correct order of commands to install a package on Ubuntu?",
+    "type": "single",
+    "options": [
+      "apt install → apt update",
+      "apt upgrade → apt install",
+      "apt update → apt install",
+      "apt refresh → apt get"
+    ],
+    "correct": 2,
+    "explanation": "apt update refreshes the package index from repositories. apt install then downloads and installs the package. Without running apt update first, you may install an outdated version or get a 'package not found' error."
+  },
+  {
+    "id": 5,
+    "question": "Which command removes a package and its configuration files on a Debian-based system?",
+    "type": "single",
+    "options": [
+      "apt remove nginx",
+      "apt purge nginx",
+      "apt delete nginx",
+      "apt uninstall nginx"
+    ],
+    "correct": 1,
+    "explanation": "apt purge removes the package and its configuration files. apt remove removes the package but leaves config files behind. This matters when you want a completely clean removal — for example before reinstalling a service with fresh configuration."
+  },
+  {
+    "id": 6,
+    "question": "What does lsblk show?",
+    "type": "single",
+    "options": [
+      "Currently running processes",
+      "Block devices — disks and their partitions",
+      "Network interfaces",
+      "Mounted filesystems only"
+    ],
+    "correct": 1,
+    "explanation": "lsblk lists block devices in a tree format showing disks, partitions, and their sizes. It is the first command to run when inspecting disk layout. It shows device names like sda, sdb, and their partitions like sda1, sda2."
+  },
+  {
+    "id": 7,
+    "question": "What is the LVM component hierarchy in order from physical to logical?",
+    "type": "single",
+    "options": [
+      "Logical Volume → Volume Group → Physical Volume",
+      "Physical Volume → Volume Group → Logical Volume",
+      "Volume Group → Physical Volume → Logical Volume",
+      "Physical Volume → Logical Volume → Volume Group"
+    ],
+    "correct": 1,
+    "explanation": "The correct order is Physical Volume (PV) — the actual disk or partition, Volume Group (VG) — pool of storage from one or more PVs, Logical Volume (LV) — the usable storage that gets formatted and mounted. PV → VG → LV."
+  },
+  {
+    "id": 8,
+    "question": "Which command creates a physical volume on /dev/sdb?",
+    "type": "single",
+    "options": [
+      "vgcreate /dev/sdb",
+      "lvcreate /dev/sdb",
+      "pvcreate /dev/sdb",
+      "mkfs /dev/sdb"
+    ],
+    "correct": 2,
+    "explanation": "pvcreate initialises a disk or partition as an LVM Physical Volume. This is always the first LVM step. After pvcreate you can add the PV to a Volume Group with vgcreate or vgextend."
+  },
+  {
+    "id": 9,
+    "question": "What does df -h show?",
+    "type": "single",
+    "options": [
+      "Disk hardware information",
+      "Filesystem usage — how full each mounted filesystem is",
+      "Directory sizes",
+      "Disk read and write speeds"
+    ],
+    "correct": 1,
+    "explanation": "df -h shows each mounted filesystem, its total size, used space, available space, and percentage used in human-readable format. This is the command to run when you suspect a disk is full. du -sh shows directory sizes."
+  },
+  {
+    "id": 10,
+    "question": "Which command extends a logical volume called data_lv by 5GB?",
+    "type": "single",
+    "options": [
+      "lvgrow -L +5G /dev/vg/data_lv",
+      "lvextend -L +5G /dev/vg/data_lv",
+      "vgextend -L +5G /dev/vg/data_lv",
+      "resize -L +5G /dev/vg/data_lv"
+    ],
+    "correct": 1,
+    "explanation": "lvextend extends a logical volume. The -L +5G syntax adds 5GB to the current size. After extending the LV you must also resize the filesystem — xfs_growfs for XFS or resize2fs for ext4. The filesystem does not grow automatically."
+  },
+  {
+    "id": 11,
+    "question": "After extending an XFS logical volume, which command resizes the filesystem?",
+    "type": "single",
+    "options": [
+      "resize2fs /mount/point",
+      "xfs_growfs /mount/point",
+      "fsck /mount/point",
+      "mkfs.xfs /mount/point"
+    ],
+    "correct": 1,
+    "explanation": "xfs_growfs expands an XFS filesystem to use all available space on its block device. It takes the mount point as an argument, not the device path. resize2fs is the equivalent for ext4. mkfs formats — never run mkfs on a mounted filesystem."
+  },
+  {
+    "id": 12,
+    "question": "What file must be updated to make a filesystem mount persist after reboot?",
+    "type": "single",
+    "options": ["/etc/mounts", "/etc/fstab", "/etc/disks", "/etc/filesystems"],
+    "correct": 1,
+    "explanation": "/etc/fstab defines which filesystems are mounted automatically at boot. Each line specifies device, mount point, filesystem type, options, dump, and pass. Always test with mount -a after editing fstab to catch errors before rebooting."
+  },
+  {
+    "id": 13,
+    "question": "Which command checks if an ext4 filesystem has errors?",
+    "type": "single",
+    "options": [
+      "diskcheck /dev/sda1",
+      "fsck /dev/sda1",
+      "chkdsk /dev/sda1",
+      "verify /dev/sda1"
+    ],
+    "correct": 1,
+    "explanation": "fsck (filesystem check) checks and repairs filesystem errors. It must be run on unmounted filesystems — never run fsck on a mounted filesystem. On ext4 filesystems: fsck.ext4 or e2fsck are also valid."
+  },
+  {
+    "id": 14,
+    "question": "What does mount -a do?",
+    "type": "single",
+    "options": [
+      "Mounts all available disks",
+      "Mounts all filesystems listed in /etc/fstab",
+      "Shows all currently mounted filesystems",
+      "Remounts all filesystems read-write"
+    ],
+    "correct": 1,
+    "explanation": "mount -a reads /etc/fstab and mounts everything listed that is not already mounted. Use this to test fstab changes without rebooting. If it returns an error, fix the fstab entry before rebooting — a bad fstab can prevent the system from booting."
+  },
+  {
+    "id": 15,
+    "question": "Which of the following are valid ways to identify a disk in /etc/fstab? Select all that apply.",
+    "type": "multiple",
+    "options": [
+      "UUID=abc123-...",
+      "/dev/sda1",
+      "LABEL=data",
+      "/dev/vg/lv_name"
+    ],
+    "correct": [0, 1, 2, 3],
+    "explanation": "All four are valid fstab identifiers. UUID is preferred because it does not change if disks are added or reordered. Device paths like /dev/sda1 can change when hardware changes. LABEL uses a filesystem label set with e2label or xfs_admin -L. LVM paths are stable."
+  },
+  {
+    "id": 16,
+    "question": "What does the dnf history command show?",
+    "type": "single",
+    "options": [
+      "System boot history",
+      "Package installation and removal history",
+      "User login history",
+      "Network connection history"
+    ],
+    "correct": 1,
+    "explanation": "dnf history shows a log of all dnf transactions — installations, removals, and updates with timestamps. You can undo a specific transaction with dnf history undo ID. This is useful for rolling back a problematic package installation."
+  },
+  {
+    "id": 17,
+    "question": "What is swap space used for?",
+    "type": "single",
+    "options": [
+      "Temporary file storage",
+      "Overflow memory when RAM is full",
+      "Package download cache",
+      "Log file storage"
+    ],
+    "correct": 1,
+    "explanation": "Swap is disk space used as overflow when physical RAM is exhausted. The kernel moves inactive memory pages to swap to free RAM. Swap is much slower than RAM — consistent swap usage means the system needs more RAM or has a memory leak."
+  },
+  {
+    "id": 18,
+    "question": "Which command shows current swap usage?",
+    "type": "single",
+    "options": ["df -h", "lsblk", "free -h", "swapon --show"],
+    "correct": 3,
+    "explanation": "swapon --show lists all active swap spaces with their size and usage. free -h also shows swap in the output summary. Both are correct but swapon --show is more specific to swap. free -h shows RAM and swap together."
+  },
+  {
+    "id": 19,
+    "question": "What does du -sh /var/log show?",
+    "type": "single",
+    "options": [
+      "The number of log files in /var/log",
+      "The total disk space used by /var/log",
+      "The largest log file in /var/log",
+      "The last modification time of /var/log"
+    ],
+    "correct": 1,
+    "explanation": "du -sh gives the total disk usage of a directory in human-readable summarised format. -s means summarise (show total rather than each subdirectory), -h means human-readable (KB, MB, GB). Essential for finding what is consuming disk space."
+  },
+  {
+    "id": 20,
+    "question": "Which of the following are correct about /etc/fstab fields? Select all that apply.",
+    "type": "multiple",
+    "options": [
+      "Field 1 is the device or UUID",
+      "Field 2 is the mount point",
+      "Field 3 is the filesystem type",
+      "Field 6 controls the fsck check order at boot"
+    ],
+    "correct": [0, 1, 2, 3],
+    "explanation": "All four are correct. The six fstab fields are: 1=device, 2=mount point, 3=filesystem type, 4=mount options, 5=dump (backup, usually 0), 6=fsck pass order (0=skip, 1=root first, 2=others). Understanding all six fields is essential for safe fstab editing."
+  }
+]

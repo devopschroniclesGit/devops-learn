@@ -19,6 +19,8 @@ const sidebars = {
 	    'track-1/linux/quiz-networking',
 	    'track-1/linux/processes',
             'track-1/linux/quiz-processes',
+	    'track-1/linux/packages',
+	    'track-1/linux/quiz-packages',
           ],
         },
       ],
